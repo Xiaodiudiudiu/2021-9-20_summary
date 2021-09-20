@@ -1,0 +1,28 @@
+#include <iostream>
+#include<string>
+#include<cstring>
+
+int main()
+{
+	using namespace std;
+
+	struct perks
+	{
+		string str;
+		short year;
+		double money;
+	};
+
+	perks people[2] =
+	{
+		{"He xiaodiu",20,203943},
+		{"Zhu Ziyang",20,2394348}
+	};
+	perks axs =
+	{
+		"MLXSK",74,545.254
+	};
+
+	cout << people[0].str << endl << people[1].str << endl << axs.str ;
+	return 0;
+}
