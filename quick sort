@@ -1,0 +1,48 @@
+#include<iostream>;
+using namespace std;
+
+int a[101], n;//n<=100
+void sort(int left, int right) //from small to big
+{
+	int i, j, t;
+	i = left;
+	j = right;
+	t = a[left];//benchmark
+	if (left>right) //位置换完时的终止语句
+		return;
+	
+	while (i != j)
+	{
+		while (a[j] >= t && i < j)//队列末端先行 不然就白换了
+		{
+			--j;
+		}
+		while (a[i] <= t && i < j)//基准端再行 比较都是根据基准值大小进行
+		{
+			++i;
+		}
+		if(i<j)
+		{
+			int temp;
+			temp = a[i]; a[i] = a[j]; a[j] = temp;//将两个位置上的值互换
+		}
+	}
+	a[left] = a[i]; a[i] = t;//将基准值换到 i = j 处
+	//一轮循环操作结束，再前一半的顺序换  后一半的顺序换
+	sort(left, i - 1);
+	sort(i + 1, right);
+	return;
+}
+int main()
+{
+	
+	cin >> n;
+	for (int i = 1; i <= n; ++i)
+	{
+		cin >> a[i];
+	}
+	sort(1, n);
+	for(int i= 1; i <= n; ++i)
+		cout << a[i] << ' ';
+	return 0;
+}
