@@ -8,12 +8,14 @@ void sort(int left, int right) //from small to big
 	i = left;
 	j = right;
 	t = a[left];//benchmark
-	if (left>right) //位置换完时的终止语句
+	if (left > right) //位置换完时的终止语句
 		return;
+
 	
+	//********************************************************************************************
 	while (i != j)
 	{
-		while (a[j] >= t && i < j)//队列末端先行 不然就白换了
+		while (a[j] >= t && i < j)//队列末端先行 不然就白换了 i<j 保证了相同的元素都放在了基准值的右边
 		{
 			--j;
 		}
@@ -21,12 +23,14 @@ void sort(int left, int right) //from small to big
 		{
 			++i;
 		}
-		if(i<j)
+		//第一阶段 循环终止的决定性条件是 a[i]a[j]与 基准值 t的比较
+		if (i < j)
 		{
 			int temp;
-			temp = a[i]; a[i] = a[j]; a[j] = temp;//将两个位置上的值互换
+			temp = a[i]; a[i] = a[j]; a[j] = temp;//将左右两个位置上的值互换
 		}
 	}
+//********************************************************************************************
 	a[left] = a[i]; a[i] = t;//将基准值换到 i = j 处
 	//一轮循环操作结束，再前一半的顺序换  后一半的顺序换
 	sort(left, i - 1);
@@ -35,14 +39,14 @@ void sort(int left, int right) //from small to big
 }
 int main()
 {
-	
+
 	cin >> n;
 	for (int i = 1; i <= n; ++i)
 	{
 		cin >> a[i];
 	}
 	sort(1, n);
-	for(int i= 1; i <= n; ++i)
+	for (int i = 1; i <= n; ++i)
 		cout << a[i] << ' ';
 	return 0;
 }
